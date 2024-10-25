@@ -14,7 +14,8 @@ server.use((req, res, next) => {
     const newObject = {};
 
     const db = router.db;
-    const lastId = db.get("todos").value().length + 1; // 마지막 ID + 1
+    const todos = db.get("todos").value();
+    const lastId = todos[todos.length - 1].id + 1; // 마지막 ID + 1
     req.body.id = lastId;
 
     // key 순서 재정렬
