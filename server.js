@@ -15,7 +15,12 @@ server.use((req, res, next) => {
 
     const db = router.db;
     const todos = db.get("todos").value();
-    const lastId = todos[todos.length - 1].id + 1; // 마지막 ID + 1
+    let lastId = null;
+    if (todos.length === 0) {
+      lastId = 1;
+    } else {
+      lastId = todos[todos.length - 1].id + 1; // 마지막 ID + 1
+    }
     req.body.id = lastId;
 
     // key 순서 재정렬
